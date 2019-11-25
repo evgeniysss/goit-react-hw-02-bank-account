@@ -19,13 +19,13 @@ export default class Controls extends Component {
 
   onDeposit = () => {
     const { onDeposit } = this.props;
-    onDeposit(this.state.amount);
+    onDeposit(Number(this.state.amount));
     this.setState({ amount: '' });
   };
 
   onWithdraw = () => {
     const { onWithdraw } = this.props;
-    onWithdraw(this.state.amount);
+    onWithdraw(Number(this.state.amount));
     this.setState({ amount: '' });
   };
 

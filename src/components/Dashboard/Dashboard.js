@@ -15,7 +15,7 @@ export default class Dashboard extends Component {
   };
 
   onDeposit = moneyTransaction => {
-    if (Number(moneyTransaction) === 0) {
+    if (moneyTransaction === 0) {
       return toast.warn('Введите сумму для проведения операции!', {
         position: toast.POSITION.TOP_CENTER,
       });
@@ -23,23 +23,23 @@ export default class Dashboard extends Component {
     const newOnDeposit = {
       id: uuid(),
       type: 'deposit',
-      amount: Number(moneyTransaction),
+      amount: moneyTransaction,
       date: new Date().toLocaleString(),
     };
     this.setState(state => ({
       transactions: [newOnDeposit, ...state.transactions],
-      balance: Number(state.balance) + Number(moneyTransaction),
+      balance: state.balance + moneyTransaction,
     }));
     // return '';
   };
 
   onWithdraw = moneyTransaction => {
-    if (Number(moneyTransaction) === 0) {
+    if (moneyTransaction === 0) {
       return toast.warn('Введите сумму для проведения операции!', {
         position: toast.POSITION.TOP_CENTER,
       });
     }
-    if (Number(moneyTransaction) > this.state.balance) {
+    if (moneyTransaction > this.state.balance) {
       return toast.error(
         'На счету недостаточно средств для проведения операции!',
         {
@@ -50,12 +50,12 @@ export default class Dashboard extends Component {
     const newWithdraw = {
       id: uuid(),
       type: 'withdraw',
-      amount: Number(moneyTransaction),
+      amount: moneyTransaction,
       date: new Date().toLocaleString(),
     };
     this.setState(state => ({
       transactions: [newWithdraw, ...state.transactions],
-      balance: Number(state.balance) - Number(moneyTransaction),
+      balance: state.balance - moneyTransaction,
     }));
   };
 
